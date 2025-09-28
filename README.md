@@ -80,6 +80,22 @@ Example query:
 SELECT COUNT(*) FROM wikimedia_events_2025_09;
 SELECT * FROM wikimedia_events_2025_09 ORDER BY timestamp DESC LIMIT 10;
 ```
+##  Challenges encountered during the pipeline 
+
+Incorrect Kafka Ports
+
+Using the correct Kafka ports is necessary for Docker containers to connect. Make sure to use the internal (`29092`) port for producer/consumer and expose the external (`9092`) port in Docker Compose.
+
+Producer Stopped Unexpectedly
+
+The producer sometimes stopped streaming data due to network errors or Wikimedia EventStreams errors (e.g., 403 Forbidden or ChunkedEncodingError).
+Introduced retry loops, proper error handling, and SSE client headers to ensure the producer reconnects automatically and continues streaming.
+
+Waiting for Kafka and Postgres
+
+The consumer was attempting to read messages before Kafka was ready, leading to NoBrokersAvailable errors.
+Added connection retries and waits to ensure Kafka is available before starting the consumer.
+Similarly, the consumer waits for Postgres to be ready before inserting data.
 
 
 ## 📄 License
