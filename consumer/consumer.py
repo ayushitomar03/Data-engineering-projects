@@ -71,17 +71,17 @@ def insert_data(item):
     event_id = item.get("id")
 
     if ts_val is None:
-        print(f"⚠️ Skipping event with no timestamp: {item}", flush=True)
+        print(f"Skipping event with no timestamp: {item}", flush=True)
         return
 
     if event_id is None:
-        print(f"⚠️ Skipping event with no ID: {item}", flush=True)
+        print(f"Skipping event with no ID: {item}", flush=True)
         return
     try:
         # Convert UNIX epoch to timezone-aware datetime
         ts = datetime.fromtimestamp(float(ts_val), tz=timezone.utc)
     except Exception as e:
-        print(f"⚠️ Failed to parse timestamp {ts_val}: {e}", flush=True)
+        print(f"Failed to parse timestamp {ts_val}: {e}", flush=True)
         return
 
     # Ensure the correct monthly partition exists
