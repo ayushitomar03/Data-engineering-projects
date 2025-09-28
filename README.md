@@ -43,7 +43,7 @@ The stack is containerized with **Docker Compose**.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/wikimedia-kafka-pipeline.git
+git clone https://github.com/ayushitomar03/wikimedia-kafka-pipeline.git
 cd wikimedia-kafka-pipeline
 ```
 
